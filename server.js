@@ -13,7 +13,11 @@ app.use(express.json());
 app.use(express.static("public"));
 app.use(routes)
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/craigslist", { useNewUrlParser: true });
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/craigslist";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
+
 
 app.listen(PORT, function () {
   console.log("App running on port " + PORT + "!");
